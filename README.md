@@ -1,5 +1,8 @@
 # Odyssey
-Message-based embedded service platform
+The Odyssey 2000 Network Attached Storage Peripheral is a highly reliable, high performance, high capacity storage peripheral.  The Odyssey is intended for use in installations where performance and reliability are a must.  It should never, ever fail!!! A cornerstone of the Odyssey’s design is that it shall have “no single point of failure.”  Commensurate with that design goal, the Odyssey may be configured so that within the chassis there is redundant everything, fans, power supplies, circuit boards, everything.  Note that this is one configuration and other less redundant configurations are also supported.
+The performance and reliability to be delivered by Odyssey is no small engineering task.  In addition to the presence of fast and reliable hardware, the software that puts that hardware into action must be equally fast, robust and flexible - the work of gods.  This document describes that software.
+
+CHAOS - a message-based embedded service platform
 CHAOS is a message-based operating system built on a simple multi-processing kernel which is currently Nucleus.
 Writing an application for CHAOS consists of writing one or more DDMs. An application DDM which is built on the DDM base class
 allows the application to send and receive messages to/from other application DDMs.

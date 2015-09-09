@@ -3,6 +3,7 @@ The Odyssey 2000 Network Attached Storage Peripheral is a highly reliable, high 
 The performance and reliability to be delivered by Odyssey is no small engineering task.  In addition to the presence of fast and reliable hardware, the software that puts that hardware into action must be equally fast, robust and flexible - the work of gods.  This document describes that software.
 
 CHAOS - a message-based embedded service platform
+
 CHAOS is a message-based operating system built on a simple multi-processing kernel which is currently Nucleus.
 Writing an application for CHAOS consists of writing one or more DDMs. An application DDM which is built on the DDM base class
 allows the application to send and receive messages to/from other application DDMs.

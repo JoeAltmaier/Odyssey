@@ -1,0 +1,134 @@
+Microsoft Developer Studio Workspace File, Format Version 6.00
+# WARNING: DO NOT EDIT OR DELETE THIS WORKSPACE FILE!
+
+###############################################################################
+
+Project: "AlarmLibrary"=..\..\AlarmManager\AlarmLibrary\AlarmLibrary.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "ChaosL2"=..\..\ChaosL2\ChaosL2.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "CmdQueues"=..\..\CmdQueues\CmdQueues.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "DdmPTS"=..\..\DdmPTS\DdmPTS.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "Oos"=..\..\Oos\Oos.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "PartitionMstr"=..\PartitionMstr.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "PartitionMstrTest"=.\PartitionMstrTest.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name PartitionMstr
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name DdmPTS
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name Oos
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name util
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name CmdQueues
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ChaosL2
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name AlarmLibrary
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "util"=..\..\Util\util.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Global:
+
+Package=<5>
+{{{
+}}}
+
+Package=<3>
+{{{
+}}}
+
+###############################################################################
+

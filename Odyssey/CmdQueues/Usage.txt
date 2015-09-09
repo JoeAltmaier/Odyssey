@@ -1,0 +1,248 @@
+//*************************************************************************
+//
+//					CMD SERVER OBJECT USAGE:
+//					========================
+//
+//*************************************************************************
+
+CmdServer object is created by the Master. The CmdServer will
+allow the Master to do the following:
+	1) receive commands from different CmdSender's.
+
+	2) After the Master processes these commands, the CmdServer allows
+	the Master to report the status of the cmd back to the CmdSender.
+
+	3) Additionally the Master would like to report asynchronous status
+	changes (events). The CmdServer object provides a method to do that.
+
+
+Example:
+
+
+	DATA STRUCTURES
+	---------------
+	typedef union {
+			RMSTR_CREATE_ARRAY_DEFINITION	createArrayDefinition;
+			RMSTR_CREATE_SPARE_INFO			createSpareInfo;
+			...
+			...
+	} RMSTR_CMND_PARAMETERS;
+
+	typedef struct {
+		U32						opcode;
+		RMSTR_CMND_PARAMETERS	cmdParams;
+	} RMSTR_CMND_INFO;
+
+
+	INITIALIZATION:
+	--------------
+	// Create the CmdServer Object and call its initialize method
+	// Wait for the initialization done reply
+	m_pCmdServer = 
+		new CmdServer(
+				RMSTR_CMD_QUEUE_TABLE,		//name of table
+				sizeof(RMSTR_CMND_INFO),	// max size of cmd data	(must be atleast 4)
+				sizeof(RMSTR_STATUS_INFO),	// max size of status data (can be 0)
+				this,						// pDdmServices
+				(pCmdCallback_t)&DdmRAIDMstr::rmstrListenerForCommands); // Cmd Listener
+
+	m_pCmdServer->csrvInitialize(
+		(pInitializeCallback_t)&DdmRAIDMstr::rmstrObjectInitializedReply);	
+
+
+	INITIALIZATION DONE REPLY
+	-------------------------
+	void DdmRAIDMstr
+	::rmstrObjectInitializedReply(STATUS status)
+	{
+		if (!status){
+			// We are initialized successfully, so should be ready
+			// to accept commands
+		}
+	}
+
+	LISTENER FOR COMMANDS AND REPORT STATUS
+	---------------------------------------
+	// Called when any CmdSender object calls its Execute Method.
+	// So the Master will receive the command and process it and
+	// report the status for the cmd.
+
+	void DdmRAIDMstr
+	::rmstrListenerForCommands(HANDLE handle, void* pCmdData)
+	{
+		RMSTR_CMND_INFO					*pCmdInfo;
+		RMSTR_CMND_PARAMETERS			*pCmdParams;
+		RMSTR_CREATE_ARRAY_DEFINITION	*pArrayDef;
+		STATUS							rc;
+
+		pCmdInfo = (RMSTR_CMND_INFO *)pCmdData;
+		pCmdParams = &pCmdInfo->cmdParams;
+
+		rc = RMSTR_SUCCESS;
+
+		switch (pCmdInfo->opcode){
+			case RMSTR_CMND_CREATE_ARRAY:
+				pArrayDef = 
+					(RMSTR_CREATE_ARRAY_DEFINITION *)&pCmdParams->createArrayDefinition;
+					rc = CreateTheNewArray(handle, pCmdInfo);
+					break;
+			case RMSTR_CMND_DELETE_ARRAY:
+				break;
+			case RMSTR_CMND_CREATE_SPARE:
+				break;
+			default:
+				break;
+		}
+		m_pCmdServer->csrvReportCmdStatus(
+				handle,
+				rc,					// completion code
+				NULL,				// result Data
+				pCmdInfo);			// pCQRecord
+	}
+
+
+	REPORT EVENT
+	-------------
+	Any Event can be reported to all the CmdSenders who have registered
+	for events. The following is the call for ReportEvent
+		
+		// prepare the event data
+		pEvtSpareAdded = new RMSTR_EVT_SPARE_ADDED_STATUS;
+		pEvtSpareAdded->spareid = 12;
+		pEvtSpareAdded->spareType = RAID_DEDICATED_SPARE;
+
+		m_pCmdServer->csrvReportEvent(
+			RMSTR_EVT_SPARE_ADDED,		// completion code
+			pEvtSpareAdded);			// event Data
+		delete pEvtSpareAdded;
+
+
+
+//*************************************************************************
+//
+//					CMD SENDER OBJECT USAGE:
+//					========================
+//
+//*************************************************************************
+
+
+CmdSender object can be created by any DDM wishing to send commands
+to a particular master. 
+CmdSender allows you to do the following:
+
+	1) Send Cmnds to the Master
+
+	2) Receive Cmnd Status from the Master
+	
+	3) Receive Events from the Master.
+	
+
+
+Example:
+
+	INITIALIZATION:
+	--------------
+	// Create the CmdSender Object and call its initialize method
+	// Wait for the initialization done reply
+	// WARNING:
+	// The table name, cmd data size and status data size should
+	// match the ones used by the CmdServer
+	m_pCmdSender = 
+		new CmdSender(
+				RMSTR_CMD_QUEUE_TABLE,		//name of table
+				sizeof(RMSTR_CMND_INFO),	// max size of cmd data	(must be atleast 4)
+				sizeof(RMSTR_STATUS_INFO),	// max size of status data (can be 0)
+				this);						// pDdmServices
+
+	m_pCmdSender->csndrInitialize(
+			(pInitializeCallback_t)&DdmRAIDMstrTest::tstObjectInitializedReply);
+
+	EVENT REGISTRATION
+	------------------
+	// If you wish to be notified to events in the Master, then
+	// register for it
+	m_pCmdSender->csndrRegisterForEvents(
+		(pEventCallback_t)&DdmRAIDMstrTest::rmstrEventHandler);
+
+
+	INITIALIZATION DONE REPLY
+	-------------------------
+	void DdmTest
+	::tstObjectInitializedReply(STATUS status)
+	{
+		if (!status){
+			// We are initialized successfully, so ready to send
+			// commands and receive events (if registered)
+		}
+	}
+
+	CMD EXECUTE
+	-----------
+	// Prepare cmd data and call execute
+	RMSTR_CMND_INFO				*pCmdInfo;
+	RMSTR_CMND_PARAMETERS		*pCmdParams;
+	RMSTR_CREATE_SPARE_INFO		*pCreateSpareInfo;
+
+
+	pCmdInfo = (RMSTR_CMND_INFO *)new char[sizeof(RMSTR_CMND_INFO)];
+	memset(pCmdInfo,0,sizeof(RMSTR_CMND_INFO));
+
+	pCmdInfo->opcode = RMSTR_CMND_CREATE_SPARE;
+	pCmdParams = 
+			(RMSTR_CMND_PARAMETERS *) (&pCmdInfo->cmdParams);
+	pCreateSpareInfo = 
+			(RMSTR_CREATE_SPARE_INFO *) (&pCmdParams->createSpareInfo);
+	pCreateSpareInfo->spareType = RAID_DEDICATED_SPARE;
+	pCreateSpareInfo->arrayRowId = *pArrayRowId;
+
+	STATUS status = m_pCmdSender->csndrExecute(
+		pCmdInfo,
+		(pCmdCompletionCallback_t)&DdmTest::rmstrCommandCompletionReply,
+		NULL);	// you can pass any context
+
+	CMD COMPLETION
+	--------------
+	// Called when the cmd executed is completed by the Master
+	// and a ReportCmdStatus() is done by the Master's CmdServer object
+	void DdmTest
+	::rmstrCommandCompletionReply(
+			U32					completionCode,
+			void				*pStatusData,
+			void				*pCmdData,
+			void				*pCmdContext)
+	{
+		RMSTR_CMND_INFO *pInfo = (RMSTR_CMND_INFO *)pCmdData;
+		switch(completionCode){
+		case RMSTR_SUCCESS:
+			switch (pInfo->opcode){
+			case RMSTR_CMND_DELETE_ARRAY:
+				break;
+			case RMSTR_CMND_CREATE_SPARE:
+				break;
+			default:
+				break;
+		}
+		if (pContext){
+			delete pContext;
+			pContext = NULL;
+		}
+	}
+
+
+	EVENT NOTIFICATION
+	------------------
+	// Event received when Master does a ReportEvent() on its
+	// CmdServer object
+	void DdmTest
+	::rmstrEventHandler(
+				U32				eventCode,
+				void			*pStatusData)
+	{
+		switch(eventCode){
+		case RMSTR_EVT_ARRAY_ADDED:
+			break;
+		case RMSTR_EVT_SPARE_ADDED:
+			pEvtSpareAdded = (RMSTR_EVT_SPARE_ADDED_STATUS *)pStatusData;
+			break;
+		}
+	}

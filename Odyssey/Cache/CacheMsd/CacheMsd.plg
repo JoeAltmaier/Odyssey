@@ -1,0 +1,65 @@
+--------------------Configuration: CacheMsd - Win32 Debug--------------------
+Begining build with project "E:\TreeRoot\Odyssey\Cache\CacheMsd\CacheMsd.dsp", at root.
+Active configuration is Win32 (x86) Static Library (based on Win32 (x86) Static Library)
+
+Project's tools are:
+			"32-bit C/C++ Compiler for 80x86" with flags "/nologo /MDd /W3 /GX /Z7 /Od /I "..\..\..\include" /I "..\..\..\include\i2o" /I "..\..\..\include\nucleus" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /FR".\Debug/" /Fp".\Debug/CacheMsd.pch" /YX /Fo".\Debug/" /Fd".\Debug/" /FD /c "
+			"Browser Database Maker" with flags "/nologo /o".\Debug/CacheMsd.bsc" "
+			"Library Manager" with flags "/nologo /out:".\Debug\Cache.lib" "
+			"Custom Build" with flags ""
+			"<Component 0xa>" with flags ""
+
+Creating temp file "c:\windows\TEMP\RSPB351.TMP" with contents </nologo /MDd /W3 /GX /Z7 /Od /I "..\..\..\include" /I "..\..\..\include\i2o" /I "..\..\..\include\nucleus" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /FR".\Debug/" /Fp".\Debug/CacheMsd.pch" /YX /Fo".\Debug/" /Fd".\Debug/" /FD /c 
+"E:\TreeRoot\Odyssey\Cache\CmClose.cpp"
+"E:\TreeRoot\Odyssey\Cache\CmFlush.cpp"
+"E:\TreeRoot\Odyssey\Cache\CmFrameTable.cpp"
+"E:\TreeRoot\Odyssey\Cache\CmInitialize.cpp"
+"E:\TreeRoot\Odyssey\Cache\CmLock.cpp"
+"E:\TreeRoot\Odyssey\Cache\CmOpen.cpp"
+"E:\TreeRoot\Odyssey\Cache\CmReplace.cpp"
+"E:\TreeRoot\Odyssey\Cache\CmWrite.cpp"
+>
+Creating command line "cl.exe @c:\windows\TEMP\RSPB351.TMP" 
+Creating temp file "c:\windows\TEMP\RSPB352.TMP" with contents </nologo /out:".\Debug\Cache.lib" 
+.\Debug\CmCache.obj
+.\Debug\CmClose.obj
+.\Debug\CmFlush.obj
+.\Debug\CmFrameTable.obj
+.\Debug\CmInitialize.obj
+.\Debug\CmLock.obj
+.\Debug\CmMem.obj
+.\Debug\CmOpen.obj
+.\Debug\CmPageTable.obj
+.\Debug\CmReplace.obj
+.\Debug\CmStats.obj
+.\Debug\CmWrite.obj>
+Creating command line "link.exe -lib @c:\windows\TEMP\RSPB352.TMP" 
+Compiling...
+CmClose.cpp
+CmFlush.cpp
+CmFrameTable.cpp
+CmInitialize.cpp
+CmLock.cpp
+CmOpen.cpp
+CmReplace.cpp
+CmWrite.cpp
+Creating library...
+Creating temp file "c:\windows\TEMP\RSPC0.TMP" with contents </nologo /o".\Debug/CacheMsd.bsc" 
+.\Debug\CmCache.sbr
+.\Debug\CmClose.sbr
+.\Debug\CmFlush.sbr
+.\Debug\CmFrameTable.sbr
+.\Debug\CmInitialize.sbr
+.\Debug\CmLock.sbr
+.\Debug\CmMem.sbr
+.\Debug\CmOpen.sbr
+.\Debug\CmPageTable.sbr
+.\Debug\CmReplace.sbr
+.\Debug\CmStats.sbr
+.\Debug\CmWrite.sbr>
+Creating command line "bscmake.exe @c:\windows\TEMP\RSPC0.TMP" 
+Creating browse info file...
+
+
+
+Cache.lib - 0 error(s), 0 warning(s)

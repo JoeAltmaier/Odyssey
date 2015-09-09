@@ -1,0 +1,4 @@
+create "DISK_TABLE_1" "Field1"=U32_FT
+insert "DISK_TABLE_1" 1
+create "DISK_STATUS_1" "Field1"=U32_FT "Field2"=STRING16_FT
+insert "DISK_STATUS_1" 1 "Start          "

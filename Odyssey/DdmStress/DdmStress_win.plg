@@ -1,0 +1,54 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: DdmStress_win - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "c:\windows\TEMP\RSPD0D2.TMP" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /FR"Debug/" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\projects\gemini\Odyssey\DdmStress\BuildSys.cpp"
+"C:\projects\gemini\Odyssey\DdmStress\DdmStress.cpp"
+"C:\projects\gemini\Odyssey\DdmStress\DdmStress_win.cpp"
+"C:\projects\gemini\Odyssey\SysImage\TestDdm.cpp"
+]
+Creating command line "cl.exe @c:\windows\TEMP\RSPD0D2.TMP" 
+Creating temporary file "c:\windows\TEMP\RSPD0D3.TMP" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /FR"Debug/" /Fp"Debug/DdmStress_win.pch" /Yc"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\projects\gemini\Odyssey\DdmStress\StdAfx.cpp"
+]
+Creating command line "cl.exe @c:\windows\TEMP\RSPD0D3.TMP" 
+Creating temporary file "c:\windows\TEMP\RSPD0D4.TMP" with contents
+[
+oos.lib oos_util.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /incremental:yes /pdb:"Debug/DdmStress_win.pdb" /debug /machine:I386 /nodefaultlib:"libcd.lib" /out:"Debug/DdmStress_win.exe" /pdbtype:sept 
+.\Debug\BuildSys.obj
+.\Debug\DdmStress.obj
+.\Debug\DdmStress_win.obj
+.\Debug\StdAfx.obj
+.\Debug\TestDdm.obj
+]
+Creating command line "link.exe @c:\windows\TEMP\RSPD0D4.TMP"
+<h3>Output Window</h3>
+Compiling...
+StdAfx.cpp
+Compiling...
+BuildSys.cpp
+DdmStress.cpp
+DdmStress_win.cpp
+TestDdm.cpp
+Generating Code...
+Linking...
+Creating command line "bscmake.exe /nologo /o"Debug/DdmStress_win.bsc"  .\Debug\StdAfx.sbr .\Debug\BuildSys.sbr .\Debug\DdmStress.sbr .\Debug\DdmStress_win.sbr .\Debug\TestDdm.sbr"
+Creating browse info file...
+<h3>Output Window</h3>
+
+
+
+<h3>Results</h3>
+DdmStress_win.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

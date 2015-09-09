@@ -1,0 +1,120 @@
+#/*************************************************************************/
+#// This material is a confidential trade secret and proprietary 
+#// information of ConvergeNet Technologies, Inc. which may not be 
+#// reproduced, used, sold or transferred to any third party without the 
+#// prior written consent of ConvergeNet Technologies, Inc.  This material 
+#// is also copyrighted as an unpublished work under sections 104 and 408 
+#// of Title 17 of the United States Code.  Law prohibits unauthorized 
+#// use, copying or reproduction.
+#//
+#// File: nucleus.lcf
+#//
+#// Description:
+#// This is the Linker Command File for the Metrowerks CodeWarrior Pro3
+#// IDE.  It defines the memory layout of the target image.
+#//
+#//
+#// Update Log:
+#// 10/28/98 Jeff Nespor: Initial controlled version (256K code,
+#//                       256K data, 8K hisr stack, and 8K sys stack).
+#/*************************************************************************/
+
+
+MEMORY {
+
+    # The LENGTH parameter is the maximum size allocated for that segment
+    # of memory.  If LENGTH is 0, the linker will use as much of memory
+    # as needed even if it overflows on the next segment.
+
+    CODE (RX) : ORIGIN = 0xA0030000, LENGTH = 0x60000
+    DATA (RW) : ORIGIN = 0xA0090000, LENGTH = 0x60000
+    TEMP (RW) : ORIGIN = 0xA00F0000, LENGTH = 0x04000
+}
+
+
+SECTIONS {
+
+    ..code :
+    {
+        _ftext = .;
+        * (.text)
+        . = ALIGN(0x8);
+        _etext = .;
+
+        # Include the .rodata and the .exception sections inside 
+        # the code segment.
+
+        * (.rodata)
+        . = ALIGN(0x4);
+        * (.vtables)     # Only needed for C++
+        * (.exception)   # Only needed for C++
+
+        # Include the exception table index.  
+
+        . = ALIGN(0x4);
+        __exception_table_start__ = .;
+        EXCEPTION        # Only needed in C++
+        __exception_table_end__ = .;
+
+    } > CODE
+
+    ..data : 
+    {
+        * (.data)
+        . = ALIGN(0x8);
+
+        # The .sbss section MUST follow the .sdata section and 
+        # _gp must point 32K inside the .sdata section.  This 
+        # is required by the ABI.  Note _gp is the only symbol
+        # known to the linker.  Do not change the name.
+
+        _fsdata = .;
+        _gp = _fsdata + 0x00008000;
+        * (.sdata)
+        . = ALIGN(0x8);
+        _fsbss = .;
+        * (.sbss)
+        . = ALIGN(0x8);
+        _esbss = .;
+
+        # If the initialized and uninitialized data are in the same 
+        # section, the uninitialized data (.bss) must be last.
+
+        _fbss = .;
+        * (.bss)
+        . = ALIGN(0x8);
+        _ebss = .;
+
+    } > DATA
+
+    # Include linker defined symbols (static initializer table)
+    # This area of memory is only needed at startup and can be 
+    # reclaimed when the main program is activated.
+
+    ..tmp :
+    {
+        # Static initializers table. 
+
+        __static_init = .;
+#        STATICINIT
+        * (.ctor)
+        __static_end = .;
+
+        . = ALIGN(0x8);
+
+    } > TEMP
+
+    # Allocate space for the stacks.  The system stack grows down
+    # and the hisr stack grows up, so start them both in the middle.
+    # Note that it is OK to write over the ..tmp section as long as
+    # it is done after the calls to all the static initializers
+
+    _stack_size      = 0x2000;
+    _hisr_stack_size = 0x2000;
+
+    _stack_addr      = __static_init + _stack_size - 16;
+    _hisr_stack_addr = _stack_addr + 16;
+
+    _end = _hisr_stack_addr + _hisr_stack_size;
+
+}

@@ -1,0 +1,6 @@
+create "FOO" "Field1"=U32_FT
+insert "FOO" 1
+create "FOO_BAR" "Field1"=U32_FT "String Field"=STRING16_FT "Field3"=S32_FT
+insert "FOO" 2
+insert "FOO_BAR" 1 "Start task     " 3
+insert "FOO" 3

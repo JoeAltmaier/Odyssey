@@ -1,0 +1,54 @@
+--------------------Configuration: PeeknPoke - Win32 BoundsChecker--------------------
+Begining build with project "D:\Gemini\Odyssey\DdmPnP\PeeknPoke\PeeknPoke.dsp", at root.
+Active configuration is Win32 (x86) Application (based on Win32 (x86) Application)
+
+Project's tools are:
+			"32-bit C/C++ Compiler for 80x86" with flags "/nologo /MDd /W3 /Gm /GX /Zi /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /FR"PeeknPok/" /Yu"stdafx.h" /Fo"PeeknPok/" /Fd"PeeknPok/" /FD /c "
+			"OLE Type Library Maker" with flags "/nologo /D "_DEBUG" /mktyplib203 /o NUL /win32 "
+			"Win32 Resource Compiler" with flags "/l 0x409 /fo"PeeknPok/PeeknPoke.res" /d "_DEBUG" /d "_AFXDLL" "
+			"Browser Database Maker" with flags "/nologo /o"PeeknPok/PeeknPoke.bsc" "
+			"COFF Linker for 80x86" with flags "/nologo /subsystem:windows /incremental:no /pdb:"PeeknPok/PeeknPoke.pdb" /debug /machine:I386 /out:"PeeknPok/PeeknPoke.exe" /pdbtype:sept "
+			"Custom Build" with flags ""
+			"<Component 0xa>" with flags ""
+
+Creating temp file "C:\TEMP\RSP238.tmp" with contents </nologo /MDd /W3 /Gm /GX /Zi /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /FR"PeeknPok/" /Yu"stdafx.h" /Fo"PeeknPok/" /Fd"PeeknPok/" /FD /c 
+"D:\Gemini\Odyssey\DdmPnP\PeeknPoke\DataLink.cpp"
+>
+Creating command line "cl.exe @C:\TEMP\RSP238.tmp" 
+Creating temp file "C:\TEMP\RSP239.tmp" with contents </nologo /subsystem:windows /incremental:no /pdb:"PeeknPok/PeeknPoke.pdb" /debug /machine:I386 /out:"PeeknPok/PeeknPoke.exe" /pdbtype:sept 
+.\PeeknPok\DataLink.obj
+.\PeeknPok\LexicalAnalyser.obj
+.\PeeknPok\MainFrm.obj
+.\PeeknPok\MsgWndView.obj
+.\PeeknPok\Parser.obj
+.\PeeknPok\PeeknPoke.obj
+.\PeeknPok\PeeknPokeDoc.obj
+.\PeeknPok\PeeknPokeView.obj
+.\PeeknPok\PortConfig.obj
+.\PeeknPok\SerialPort.obj
+.\PeeknPok\StdAfx.obj
+.\PeeknPok\StringEx.obj
+.\PeeknPok\PeeknPoke.res>
+Creating command line "link.exe @C:\TEMP\RSP239.tmp" 
+Compiling...
+DataLink.cpp
+Linking...
+Creating temp file "C:\TEMP\RSP23A.tmp" with contents </nologo /o"PeeknPok/PeeknPoke.bsc" 
+.\PeeknPok\StdAfx.sbr
+.\PeeknPok\DataLink.sbr
+.\PeeknPok\LexicalAnalyser.sbr
+.\PeeknPok\MainFrm.sbr
+.\PeeknPok\MsgWndView.sbr
+.\PeeknPok\Parser.sbr
+.\PeeknPok\PeeknPoke.sbr
+.\PeeknPok\PeeknPokeDoc.sbr
+.\PeeknPok\PeeknPokeView.sbr
+.\PeeknPok\PortConfig.sbr
+.\PeeknPok\SerialPort.sbr
+.\PeeknPok\StringEx.sbr>
+Creating command line "bscmake.exe @C:\TEMP\RSP23A.tmp" 
+Creating browse info file...
+
+
+
+PeeknPoke.exe - 0 error(s), 0 warning(s)

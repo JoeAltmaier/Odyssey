@@ -1,0 +1,27 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: util - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "c:\windows\TEMP\RSPA211.TMP" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_MBCS" /D "_LIB" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\projects\gemini\Odyssey\Util\Trace.c"
+]
+Creating command line "cl.exe @c:\windows\TEMP\RSPA211.TMP" 
+Creating command line "link.exe -lib /nologo /out:"..\..\bin\win\oos_util.lib"  .\Debug\FmtIO.obj .\Debug\FmtSpec.obj .\Debug\SglLinkedList.obj .\Debug\Trace.obj .\Debug\win_crap.obj "
+<h3>Output Window</h3>
+Compiling...
+Trace.c
+Creating library...
+
+
+
+<h3>Results</h3>
+oos_util.lib - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>
